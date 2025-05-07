@@ -21,7 +21,13 @@ def main():
 
     # Uncomment this block to pass the first stage
     if file_contents:
-        raise NotImplementedError("Scanner not implemented")
+        for i in file_contents:
+            if i == '(':
+                print(f"LEFT_PAREN {i} null")
+            elif i == ')':
+                print(f"RIGHT_PAREN {i} null")
+        print("EOF  null")
+
     else:
         print("EOF  null") # Placeholder, remove this line when implementing the scanner
 

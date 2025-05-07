@@ -21,29 +21,33 @@ def main():
 
     # Uncomment this block to pass the first stage
     if file_contents:
+        valid_tokens = ['(', ')', '{', '}', '-', '+', '.', '*', '/', ';', ',']
         for i in file_contents:
-            if i == '(':
-                print(f"LEFT_PAREN {i} null")
-            elif i == ')':
-                print(f"RIGHT_PAREN {i} null")
-            elif i == '{':
-                print(f"LEFT_BRACE {i} null")
-            elif i == "}":
-                print(f"RIGHT_BRACE {i} null")
-            elif i == ",":
-                print(f"COMMA {i} null")
-            elif i == ".":
-                print(f"DOT {i} null")
-            elif i == "-":
-                print(f"MINUS {i} null")
-            elif i == "+":
-                print(f"PLUS {i} null")
-            elif i == "*":
-                print(f"STAR {i} null")
-            elif i == "/":
-                print(f"SLASH {i} null")
-            elif i == ";":
-                print(f"SEMICOLON {i} null")
+            if i in valid_tokens:
+                if i == '(':
+                    print(f"LEFT_PAREN {i} null")
+                elif i == ')':
+                    print(f"RIGHT_PAREN {i} null")
+                elif i == '{':
+                    print(f"LEFT_BRACE {i} null")
+                elif i == "}":
+                    print(f"RIGHT_BRACE {i} null")
+                elif i == ",":
+                    print(f"COMMA {i} null")
+                elif i == ".":
+                    print(f"DOT {i} null")
+                elif i == "-":
+                    print(f"MINUS {i} null")
+                elif i == "+":
+                    print(f"PLUS {i} null")
+                elif i == "*":
+                    print(f"STAR {i} null")
+                elif i == "/":
+                    print(f"SLASH {i} null")
+                elif i == ";":
+                    print(f"SEMICOLON {i} null")
+            else:
+                print(f"[line 1] Error: Unexpected character: {i}")
             
         print("EOF  null")
 

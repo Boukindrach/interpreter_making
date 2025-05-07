@@ -21,7 +21,7 @@ def main():
 
     # Uncomment this block to pass the first stage
     if file_contents:
-        valid_tokens = ['(', ')', '{', '}', '-', '+', '.', '*', '/', ';', ',']
+        valid_tokens = ['(', ')', '{', '}', '-', '+', '.', '*', '/', ';', ',', '=']
         Error = False
         for i in file_contents:
             if i in valid_tokens:
@@ -47,6 +47,8 @@ def main():
                     print(f"SLASH {i} null")
                 elif i == ";":
                     print(f"SEMICOLON {i} null")
+                elif i == "=":
+                    print(f"EQUAL {i} null")
             else:
                 print(f"[line 1] Error: Unexpected character: {i}", file=sys.stderr)
                 Error = True

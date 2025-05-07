@@ -22,6 +22,7 @@ def main():
     # Uncomment this block to pass the first stage
     if file_contents:
         valid_tokens = ['(', ')', '{', '}', '-', '+', '.', '*', '/', ';', ',']
+        Error = False
         for i in file_contents:
             if i in valid_tokens:
                 if i == '(':

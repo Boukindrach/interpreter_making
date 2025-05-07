@@ -47,9 +47,12 @@ def main():
                 elif i == ";":
                     print(f"SEMICOLON {i} null")
             else:
-                print(f"[line 1] Error: Unexpected character: {i}")
+                print(f"[line 1] Error: Unexpected character: {i}", file=sys.stderr)
+                Error = True
             
         print("EOF  null")
+        if Error:
+            sys.exit(65)
 
     else:
         print("EOF  null") # Placeholder, remove this line when implementing the scanner

@@ -30,6 +30,21 @@ def main():
                 print(f"LEFT_BRACE {i} null")
             elif i == "}":
                 print(f"RIGHT_BRACE {i} null")
+            elif i == ",":
+                print(f"COMMA {i} null")
+            elif i == ".":
+                print(f"DOT {i} null")
+            elif i == "-":
+                print(f"MINUS {i} null")
+            elif i == "+":
+                print(f"PLUS {i} null")
+            elif i == "*":
+                print(f"STAR {i} null")
+            elif i == "/":
+                print(f"SLASH {i} null")
+            elif i == ";":
+                print(f"SEMICOLON {i} null")
+            
         print("EOF  null")
 
     else:

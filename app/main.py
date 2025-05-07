@@ -26,6 +26,10 @@ def main():
                 print(f"LEFT_PAREN {i} null")
             elif i == ')':
                 print(f"RIGHT_PAREN {i} null")
+            elif i == '{':
+                print(f"LEFT_BRACE {i} null")
+            elif i == "}":
+                print(f"RIGHT_BRACE {i} null")
         print("EOF  null")
 
     else:

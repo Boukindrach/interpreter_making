@@ -24,7 +24,7 @@ def main():
         valid_tokens = {'(': "LEFT_PAREN ( null",
                         ')': "RIGHT_PAREN ) null",
                         '{': "LEFT_BRACE { null",
-                        '}': "RIGHT_BRACE { null",
+                        '}': "RIGHT_BRACE } null",
                         '-': "MINUS - null",
                         '+': "PLUS + null",
                         '.': "DOT . null",

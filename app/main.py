@@ -21,54 +21,31 @@ def main():
 
     # Uncomment this block to pass the first stage
     if file_contents:
-        valid_tokens = ['(', ')', '{', '}', '-', '+', '.', '*', '/', ';', ',', '=']
+        valid_tokens = {'(': "LEFT_PAREN ( null",
+                        ')': "RIGHT_PAREN ) null",
+                        '{': "LEFT_BRACE { null",
+                        '}': "RIGHT_BRACE { null",
+                        '-': "MINUS - null",
+                        '+': "PLUS + null",
+                        '.': "DOT . null",
+                        '*': "STAR * null",
+                        '/': "SLASH / null",
+                        ';': "SEMICOLON ; null",
+                        ',': "COMMA , null",
+                        '=': "EQUAL = null"
+                        }
         Error = False
         i = 0
         while i < len(file_contents):
             if file_contents[i] in valid_tokens:
-                if file_contents[i] == '(':
-                    print(f"LEFT_PAREN {file_contents[i]} null")
+                if file_contents[i] == "=" and file_contents[i + 1] == '=' and i + 1 < len(file_contents):
+                    print(f"EQUAL_EQUAL == null")
+                    i += 2
+                else:
+                    print(valid_tokens[file_contents[i]])
                     i += 1
-                elif file_contents[i] == ')':
-                    print(f"RIGHT_PAREN {file_contents[i]} null")
-                    i += 1
-                elif file_contents[i] == '{':
-                    print(f"LEFT_BRACE {file_contents[i]} null")
-                    i += 1
-                elif file_contents[i] == "}":
-                    print(f"RIGHT_BRACE {file_contents[i]} null")
-                    i += 1
-                elif file_contents[i] == ",":
-                    print(f"COMMA , null")
-                    i += 1
-                elif file_contents[i] == ".":
-                    print(f"DOT . null")
-                    i += 1
-                elif file_contents[i] == "-":
-                    print(f"MINUS - null")
-                    i += 1
-                elif file_contents[i] == "+":
-                    print(f"PLUS + null")
-                    i += 1
-                elif file_contents[i] == "*":
-                    print(f"STAR * null")
-                    i += 1
-                elif file_contents[i] == "/":
-                    print(f"SLASH / null")
-                    i += 1
-                elif file_contents[i] == ";":
-                    print(f"SEMICOLON ; null")
-                    i += 1
-                elif file_contents[i] == "=":
-                    if i + 1 < len(file_contents):
-                        if file_contents[i + 1] == '=':
-                            print(f"EQUAL_EQUAL == null")
-                            i += 2
-                        else:
-                            print(f"EQUAL = null")
-                            i += 1
             else:
-                print(f"[line 1] Error: Unexpected character: {file_contents[i]}", file=sys.stderr)
+                print(f"[line 1] Error: Unexpected character: {key}", file=sys.stderr)
                 Error = True
             
         print("EOF  null")

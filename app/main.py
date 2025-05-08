@@ -45,7 +45,8 @@ def main():
                     print(valid_tokens[file_contents[i]])
                     i += 1
             else:
-                print(f"[line 1] Error: Unexpected character: {key}", file=sys.stderr)
+                print(f"[line 1] Error: Unexpected character: {file_contents[i]}", file=sys.stderr)
+                i += 1
                 Error = True
             
         print("EOF  null")

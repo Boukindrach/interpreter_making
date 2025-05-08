@@ -32,7 +32,8 @@ def main():
                         '/': "SLASH / null",
                         ';': "SEMICOLON ; null",
                         ',': "COMMA , null",
-                        '=': "EQUAL = null"
+                        '=': "EQUAL = null",
+                        '!': "BANG ! null"
                         }
         Error = False
         i = 0
@@ -40,6 +41,9 @@ def main():
             if file_contents[i] in valid_tokens:
                 if file_contents[i] == "=" and i + 1 < len(file_contents) and file_contents[i + 1] == '=':
                     print(f"EQUAL_EQUAL == null")
+                    i += 2
+                elif file_contents[i] == "!" and i + 1 < len(file_contents) and file_contents[i + 1] == '=':
+                    print(f"BANG_EQUAL == null")
                     i += 2
                 else:
                     print(valid_tokens[file_contents[i]])

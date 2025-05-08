@@ -43,7 +43,7 @@ def main():
                     print(f"EQUAL_EQUAL == null")
                     i += 2
                 elif file_contents[i] == "!" and i + 1 < len(file_contents) and file_contents[i + 1] == '=':
-                    print(f"BANG_EQUAL == null")
+                    print(f"BANG_EQUAL != null")
                     i += 2
                 else:
                     print(valid_tokens[file_contents[i]])

@@ -75,6 +75,7 @@ def main():
                     if file_contents[i] == '"':
                         q += 1
                         i += 1
+                        str += '"'
                         break
                 if q == 2:
                     print(f"STRING {str} {str[1:-1]}")

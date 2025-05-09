@@ -74,7 +74,7 @@ def main():
                         break
                     i += 1
                     if i == '\n':
-                        sys.exit(0)
+                        sys.exit(65)
                 print(f"STRING {str} {str[1:-1]}")
             else:
                 print(f"[line {line}] Error: Unexpected character: {file_contents[i]}", file=sys.stderr)

@@ -72,7 +72,7 @@ def main():
                 while i < len(file_contents) and file_contents[i] != '\n':
                     str += file_contents[i]
                     i += 1
-                    if file_contents[i] == '"':
+                    if i < len(file_contents) and file_contents[i] == '"':
                         q += 1
                         i += 1
                         str += '"'

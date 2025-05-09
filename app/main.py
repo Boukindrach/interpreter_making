@@ -34,8 +34,8 @@ def main():
                         ',': "COMMA , null",
                         '=': "EQUAL = null",
                         '!': "BANG ! null",
-                        '>': "GREATER_EQUAL > null",
-                        '<': "LESS_EQUAL < null"
+                        '>': "GREATER > null",
+                        '<': "LESS < null"
                         }
         Error = False
         i = 0

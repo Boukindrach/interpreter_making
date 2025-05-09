@@ -33,7 +33,9 @@ def main():
                         ';': "SEMICOLON ; null",
                         ',': "COMMA , null",
                         '=': "EQUAL = null",
-                        '!': "BANG ! null"
+                        '!': "BANG ! null",
+                        '>': "GREATER_EQUAL",
+                        '<': "LESS_EQUAL"
                         }
         Error = False
         i = 0
@@ -44,6 +46,12 @@ def main():
                     i += 2
                 elif file_contents[i] == "!" and i + 1 < len(file_contents) and file_contents[i + 1] == '=':
                     print(f"BANG_EQUAL != null")
+                    i += 2
+                elif file_contents[i] == "<" and i + 1 < len(file_contents) and file_contents[i + 1] == '=':
+                    print(f"LESS_EQUAL <= null")
+                    i += 2
+                elif file_contents[i] == ">" and i + 1 < len(file_contents) and file_contents[i + 1] == '=':
+                    print(f"GREATER_EQUAL >= null")
                     i += 2
                 else:
                     print(valid_tokens[file_contents[i]])

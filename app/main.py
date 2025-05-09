@@ -81,6 +81,7 @@ def main():
                     print(f"STRING {str} {str[1:-1]}")
                 else:
                     print(f"[line {line}] Error: Unterminated string.", file=sys.stderr)
+                    Error = True
             else:
                 print(f"[line {line}] Error: Unexpected character: {file_contents[i]}", file=sys.stderr)
                 i += 1

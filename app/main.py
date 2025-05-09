@@ -72,7 +72,6 @@ def main():
         print("EOF  null")
         if Error:
             sys.exit(65)
-
     else:
         print("EOF  null") # Placeholder, remove this line when implementing the scanner
 

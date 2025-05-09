@@ -39,9 +39,12 @@ def main():
                         }
         Error = False
         i = 0
+        line = 1
         while i < len(file_contents):
             if file_contents[i] == ' ' or file_contents[i] == '\t' or file_contents[i] == '\n':
                 i += 1
+                if file_contents[i] == '\n':
+                    line += 1
             elif file_contents[i] in valid_tokens:
                 if file_contents[i] == "=" and i + 1 < len(file_contents) and file_contents[i + 1] == '=':
                     print(f"EQUAL_EQUAL == null")
@@ -61,7 +64,7 @@ def main():
                     print(valid_tokens[file_contents[i]])
                     i += 1
             else:
-                print(f"[line 1] Error: Unexpected character: {file_contents[i]}", file=sys.stderr)
+                print(f"[line {line}] Error: Unexpected character: {file_contents[i]}", file=sys.stderr)
                 i += 1
                 Error = True
             

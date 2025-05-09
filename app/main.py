@@ -1,4 +1,5 @@
 import sys
+import string
 
 
 def main():
@@ -35,7 +36,8 @@ def main():
                         '=': "EQUAL = null",
                         '!': "BANG ! null",
                         '>': "GREATER > null",
-                        '<': "LESS < null"
+                        '<': "LESS < null",
+                        '"': "String"
                         }
         Error = False
         i = 0
@@ -45,7 +47,7 @@ def main():
                 if file_contents[i] == '\n':
                     line += 1
                 i += 1
-            elif file_contents[i] in valid_tokens:
+            elif file_contents[i] in valid_tokens and file_contents[i] != '"':
                 if file_contents[i] == "=" and i + 1 < len(file_contents) and file_contents[i + 1] == '=':
                     print(f"EQUAL_EQUAL == null")
                     i += 2
@@ -64,6 +66,14 @@ def main():
                 else:
                     print(valid_tokens[file_contents[i]])
                     i += 1
+            elif file_contents[i] == '"':
+                str = ""
+                while i < len(file_contents) and file_contents[i] != '\n':
+                    str += file_contents[i]
+                    if i == '"':
+                        break
+                    i += 1
+                print(f"STRING {str} {str[1:-1]}")
             else:
                 print(f"[line {line}] Error: Unexpected character: {file_contents[i]}", file=sys.stderr)
                 i += 1

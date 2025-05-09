@@ -67,17 +67,17 @@ def main():
                     print(valid_tokens[file_contents[i]])
                     i += 1
             elif file_contents[i] == '"':
+                q = 1
                 str = ""
                 while i < len(file_contents) and file_contents[i] != '\n':
                     str += file_contents[i]
                     if i == '"':
+                        q += 1
                         break
                     i += 1
-                    if file_contents[i] == '\n':
-                        print(f"[line {line}] Error: Unterminated string.", file=sys.stderr)
-                        Error = True
-                        break
-                if not Error:
+                if q <= 1:
+                    print(f"[line {line}] Error: Unterminated string.", file=sys.stderr)
+                else:
                     print(f"STRING {str} {str[1:-1]}")
             else:
                 print(f"[line {line}] Error: Unexpected character: {file_contents[i]}", file=sys.stderr)

@@ -41,7 +41,7 @@ def main():
         i = 0
         line = 1
         while i < len(file_contents):
-            if file_contents[i] == ' ' or file_contents[i] == '\t' or file_contents[i] == '\n':
+            if file_contents[i] in ('\n', '\t', ' '):
                 if file_contents[i] == '\n':
                     line += 1
                 i += 1

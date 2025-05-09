@@ -59,7 +59,8 @@ def main():
                     print(f"GREATER_EQUAL >= null")
                     i += 2
                 elif file_contents[i] == "/" and i + 1 < len(file_contents) and file_contents[i + 1] == '/':
-                    break
+                    while file_contents[i] != '\n':
+                        i += 1
                 else:
                     print(valid_tokens[file_contents[i]])
                     i += 1

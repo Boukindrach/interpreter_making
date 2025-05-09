@@ -43,7 +43,7 @@ def main():
         while i < len(file_contents):
             if file_contents[i] == ' ' or file_contents[i] == '\t' or file_contents[i] == '\n':
                 i += 1
-                if file_contents[i] == '\n':
+                if i < len(file_contents) and file_contents[i] == '\n':
                     line += 1
             elif file_contents[i] in valid_tokens:
                 if file_contents[i] == "=" and i + 1 < len(file_contents) and file_contents[i + 1] == '=':

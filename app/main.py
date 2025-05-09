@@ -73,9 +73,12 @@ def main():
                     if i == '"':
                         break
                     i += 1
-                    if i == '\n':
-                        sys.exit(65)
-                print(f"STRING {str} {str[1:-1]}")
+                    if file_contents[i] == '\n':
+                        print(f"[line {line}] Error: Unterminated string.", file=sys.stderr)
+                        Error = True
+                        break
+                if not Error:
+                    print(f"STRING {str} {str[1:-1]}")
             else:
                 print(f"[line {line}] Error: Unexpected character: {file_contents[i]}", file=sys.stderr)
                 i += 1

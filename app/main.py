@@ -78,7 +78,7 @@ def main():
                 #    if i + 1 < len(file_contents) and file_contents[i] == '.' and file_contents[i + 1].isdigit():
                 #        num_str += file_contents[i]
                 #        i += 1
-                if '.' != num_str[:-1]:
+                if '.' not in num_str:
                     f = num_str
                     f += '.0'
                     print(f"NUMBER {num_str} {f}")

@@ -79,7 +79,7 @@ def main():
                     f += '.0'
                     print(f"NUMBER {num_str} {f}")
                 else:
-                    print(f"NUMBER {float(num_str)} {float(num_str)}")
+                    print(f"NUMBER {num_str} {float(num_str)}")
             elif file_contents[i] == '"':
                 q = 1
                 str = ""

@@ -66,6 +66,15 @@ def main():
                 else:
                     print(valid_tokens[file_contents[i]])
                     i += 1
+            elif isinstance(int(file_contents[i]), int):
+                str=''
+                while i < len(file_contents) and isinstance(int(file_contents[i]), int):
+                    str += file_contents[i]
+                    i += 1
+                    if i < len(file_contents) and file_contents[i] == '.' and isinstance(int(file_contents[i + 1]), int):
+                        str += file_contents[i]
+                        i += 1
+                print(f"NUMBER {str} {str}")
             elif file_contents[i] == '"':
                 q = 1
                 str = ""

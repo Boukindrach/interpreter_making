@@ -66,20 +66,20 @@ def main():
                 else:
                     print(valid_tokens[file_contents[i]])
                     i += 1
-            elif isinstance(int(file_contents[i]), int):
-                str=''
-                while i < len(file_contents) and isinstance(int(file_contents[i]), int):
-                    str += file_contents[i]
+            elif file_contents[i].isdigit():
+                num_str=''
+                while i < len(file_contents):
+                    num_str += file_contents[i]
                     i += 1
-                    if i < len(file_contents) and file_contents[i] == '.' and isinstance(int(file_contents[i + 1]), int):
-                        str += file_contents[i]
+                    if i + 1 < len(file_contents) and file_contents[i] == '.' and file_contents[i + 1].isdigit():
+                        num_str += file_contents[i]
                         i += 1
-                if '.' not in str:
-                    f = str
+                if '.' not in num_str:
+                    f = num_str
                     f += '.0'
-                    print(f"NUMBER {str} {f}")
+                    print(f"NUMBER {num_str} {f}")
                 else:
-                    print(f"NUMBER {str} {str}")
+                    print(f"NUMBER {float(num_str)} {float(num_str)}")
             elif file_contents[i] == '"':
                 q = 1
                 str = ""

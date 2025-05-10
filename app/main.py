@@ -82,7 +82,7 @@ def main():
                     f = num_str
                     f += '.0'
                     print(f"NUMBER {num_str} {f}")
-                elif valid_tokens in num_str:
+                elif num_str in valid_tokens:
                     print(f"NUMBER {num_str} {num_str}")
                 else:
                     print(f"NUMBER {num_str} {float(num_str)}")

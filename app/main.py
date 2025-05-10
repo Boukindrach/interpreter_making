@@ -74,7 +74,12 @@ def main():
                     if i < len(file_contents) and file_contents[i] == '.' and isinstance(int(file_contents[i + 1]), int):
                         str += file_contents[i]
                         i += 1
-                print(f"NUMBER {str} {str}")
+                if '.' not in str:
+                    f = str
+                    f += '.0'
+                    print(f"NUMBER {str} {f}")
+                else:
+                    print(f"NUMBER {str} {str}")
             elif file_contents[i] == '"':
                 q = 1
                 str = ""

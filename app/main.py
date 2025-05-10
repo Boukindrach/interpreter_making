@@ -68,16 +68,22 @@ def main():
                     i += 1
             elif file_contents[i].isdigit():
                 num_str=''
-                while i < len(file_contents):
+                while i < len(file_contents) and file_contents[i] != '\n':
                     num_str += file_contents[i]
                     i += 1
-                    if i + 1 < len(file_contents) and file_contents[i] == '.' and file_contents[i + 1].isdigit():
-                        num_str += file_contents[i]
-                        i += 1
-                if '.' not in num_str:
+
+                #while i < len(file_contents):
+                #    num_str += file_contents[i]
+                #    i += 1
+                #    if i + 1 < len(file_contents) and file_contents[i] == '.' and file_contents[i + 1].isdigit():
+                #        num_str += file_contents[i]
+                #        i += 1
+                if '.' != num_str[:-1]:
                     f = num_str
                     f += '.0'
                     print(f"NUMBER {num_str} {f}")
+                elif valid_tokens in num_str:
+                    print(f"NUMBER {num_str} {num_str}")
                 else:
                     print(f"NUMBER {num_str} {float(num_str)}")
             elif file_contents[i] == '"':

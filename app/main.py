@@ -96,7 +96,7 @@ def main():
                 else:
                     print(f"[line {line}] Error: Unterminated string.", file=sys.stderr)
                     Error = True
-            elif file_contents[i] >= 'a' or file_contents[i] <= 'z':
+            elif 'a' <= file_contents[i] <= 'z' or 'A' <= file_contents[i] <= 'Z' or file_contents[i] == '_':
                 num_str=''
                 while i < len(file_contents):
                     num_str += file_contents[i]

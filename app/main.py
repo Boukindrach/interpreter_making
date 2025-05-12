@@ -101,7 +101,7 @@ def main():
                 while i < len(file_contents):
                     num_str += file_contents[i]
                     i += 1
-                    if i < len(file_contents) or file_contents[i] in valid_tokens or file_contents[i].isdigit() or file_contents[i] == ' ':
+                    if (i < len(file_contents)) and (file_contents[i] in valid_tokens or file_contents[i].isdigit() or file_contents[i] == ' '):
                         break
                 print(f"IDENTIFIER {num_str} null")
             else:

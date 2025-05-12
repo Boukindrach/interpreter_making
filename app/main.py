@@ -97,9 +97,9 @@ def main():
                     print(f"[line {line}] Error: Unterminated string.", file=sys.stderr)
                     Error = True
             elif 'a' <= file_contents[i] <= 'z' or 'A' <= file_contents[i] <= 'Z' or file_contents[i] == '_':
-                num_str=''
-                while i < len(file_contents):
-                    num_str += file_contents[i]
+                ident = ''
+                while i < len(file_contents) and (file_contents[i].isalnum() or file_contents[i] == '_'):
+                    ident += file_contents[i]
                     i += 1
                     if (i < len(file_contents)) and (file_contents[i] in valid_tokens or file_contents[i] == ' '):
                         break

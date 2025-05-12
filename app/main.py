@@ -22,6 +22,24 @@ def main():
 
     # Uncomment this block to pass the first stage
     if file_contents:
+        words = { "and": "AND and null",
+                 "class": "CLASS class null",
+                 "else":"ELSE else null",
+                 "false":"FALSE false null",
+                 "for":"FOR for null",
+                 "fun":"FUN fun null",
+                 "if":"IF if null",
+                 "nil":"NIL nil null",
+                 "or":"OR or null",
+                 "print":"PRINT print null",
+                 "return":"RETURN return null",
+                 "super":"SUPER super null",
+                 "this":"THIS this null",
+                 "true":"TRUE true null",
+                 "var":"VAR var null",
+                 "while": "WHILE while null"
+
+        }
         valid_tokens = {'(': "LEFT_PAREN ( null",
                         ')': "RIGHT_PAREN ) null",
                         '{': "LEFT_BRACE { null",
@@ -103,7 +121,10 @@ def main():
                     i += 1
                     if (i < len(file_contents)) and (file_contents[i] in valid_tokens or file_contents[i] == ' '):
                         break
-                print(f"IDENTIFIER {ident} null")
+                if ident in words:
+                    print (words[ident])
+                else:
+                    print(f"IDENTIFIER {ident} null")
             else:
                 print(f"[line {line}] Error: Unexpected character: {file_contents[i]}", file=sys.stderr)
                 i += 1

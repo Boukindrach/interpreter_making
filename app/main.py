@@ -103,7 +103,7 @@ def main():
                     i += 1
                     if (i < len(file_contents)) and (file_contents[i] in valid_tokens or file_contents[i] == ' '):
                         break
-                print(f"IDENTIFIER {num_str} null")
+                print(f"IDENTIFIER {ident} null")
             else:
                 print(f"[line {line}] Error: Unexpected character: {file_contents[i]}", file=sys.stderr)
                 i += 1

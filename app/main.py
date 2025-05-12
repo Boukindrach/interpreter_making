@@ -96,6 +96,14 @@ def main():
                 else:
                     print(f"[line {line}] Error: Unterminated string.", file=sys.stderr)
                     Error = True
+            elif file_contents[i] >= 'a' or file_contents[i] <= 'z':
+                num_str=''
+                while i < len(file_contents):
+                    num_str += file_contents[i]
+                    i += 1
+                    if file_contents[i] in valid_tokens or file_contents[i].isdigit() or file_contents[i] == ' ':
+                        break
+                print(f"IDENTIFIER {num_str} null")
             else:
                 print(f"[line {line}] Error: Unexpected character: {file_contents[i]}", file=sys.stderr)
                 i += 1

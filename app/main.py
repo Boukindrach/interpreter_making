@@ -1,6 +1,7 @@
 import sys
 import string
 from tokenize_1 import tokenize
+from Parsing_1 import parse
 
 
 def main():
@@ -10,14 +11,18 @@ def main():
 
     command = sys.argv[1]
     filename = sys.argv[2]
+    commands = ["tokenize", "parse"]
 
-    if command == "tokenize":
+    if command in commands:
         print("Logs from your program will appear here!", file=sys.stderr)
         with open(filename) as file:
             file_contents = file.read()
-        tokenize(file_contents)
-
-    if command != "tokenize":
+        if command == commands[0]:
+            tokenize(file_contents)
+        elif command == commands[1]:
+            parse(file_contents)
+    
+    else:
         print(f"Unknown command: {command}", file=sys.stderr)
         exit(1)
 

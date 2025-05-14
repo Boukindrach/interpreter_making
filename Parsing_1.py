@@ -13,7 +13,7 @@ def parse(file_contects):
                         break
                     i += 1
                 print(a_str)
-                exit(1)
+                exit(0)
             elif file_contects[i].isdigit():
                 num = []
                 while (i < len(file_contects)) and (file_contects[i].isdigit() or file_contects[i] == '.'):

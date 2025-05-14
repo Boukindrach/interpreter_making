@@ -36,6 +36,21 @@ def parse(file_contects):
                     if not i < len(file_contects):
                         exit(1)
                 print(str_1)
+            elif file_contects[i] == '(' and file_contects[i + 1] == '"':
+                str_1 = "(group "
+                i += 1
+                while i < len(file_contects):
+                    if i < len(file_contects) and file_contects[i] == '"':
+                        i += 1
+                    if i < len(file_contects) and file_contects[i] == ')':
+                        str_1 += file_contects[i]
+                        i += 1
+                        break
+                    str_1 += file_contects[i]
+                    i += 1
+                    if not i < len(file_contects):
+                        exit(1)
+                print(str_1)
             elif not file_contects[i].isspace():
                 str_ = []
                 while i < len(file_contects) and not file_contects[i].isspace() and not file_contects[i].isdigit():

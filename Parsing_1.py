@@ -34,7 +34,7 @@ def parse(file_contents):
             inner = parse_expression()
             if i >= len(tokens) or tokens[i] != ")":
                 print("Error: unmatched '('")
-                exit(1)
+                exit(0)
             i += 1
             return f"(group {inner})"
         elif is_string(token):

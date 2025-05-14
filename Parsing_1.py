@@ -1,67 +1,46 @@
-def parse(file_contects):
-    if file_contects:
-        i = 0
-        num_list = []
-        other = []
-        str_ = ''
-        while i < len(file_contects):
-            if 'a' <= file_contects[i] <= 'z':
-                a_str = ""
-                while i < len(file_contects) and 'a' <= file_contects[i] <= 'z':
-                    a_str += file_contects[i]
-                    if file_contects[i] == " ":
-                        break
-                    i += 1
-                print(a_str)
-                exit(0)
-            elif file_contects[i].isdigit():
-                num = []
-                while (i < len(file_contects)) and (file_contects[i].isdigit() or file_contects[i] == '.'):
-                    num.append(file_contects[i])
-                    i += 1
-                if '.' not in num:
-                    num += ".0"
-                    num_list.append(''.join(num))
-                else:
-                    num_list.append(''.join(num))
-            elif file_contects[i] == '"':
-                str_1 = ""
+def parse(file_contents):
+    if not file_contents:
+        return
+
+    tokens = list(file_contents.replace("(", " ( ").replace(")", " ) ").split())
+    i = 0
+
+    def parse_expression():
+        nonlocal i
+
+        if i >= len(tokens):
+            return None
+
+        token = tokens[i]
+        if token == "(":
+            i += 1
+            expr = parse_expression()
+            if i >= len(tokens) or tokens[i] != ")":
+                print("Error: unmatched '('")
+                exit(1)
+            i += 1
+            return f"(group {expr})"
+
+        elif token.startswith('"') and token.endswith('"'):
+            i += 1
+            return token[1:-1]
+
+        elif token in ["true", "false", "nil"]:
+            i += 1
+            return token
+
+        else:
+            try:
+                float(token)
                 i += 1
-                while i < len(file_contects):
-                    str_1 += file_contects[i]
-                    i += 1
-                    if i < len(file_contects) and file_contects[i] == '"':
-                        i += 1
-                        break
-                    if not i < len(file_contects):
-                        exit(1)
-                print(str_1)
-            elif file_contects[i] == '(' and file_contects[i + 1] == '"':
-                str_1 = "(group "
-                i += 1
-                while i < len(file_contects):
-                    if i < len(file_contects) and file_contects[i] == '"':
-                        i += 1
-                    if i < len(file_contects) and file_contects[i] == ')':
-                        str_1 += file_contects[i]
-                        i += 1
-                        break
-                    str_1 += file_contects[i]
-                    i += 1
-                    if not i < len(file_contects):
-                        exit(1)
-                print(str_1)
-            elif not file_contects[i].isspace():
-                str_ = []
-                while i < len(file_contects) and not file_contects[i].isspace() and not file_contects[i].isdigit():
-                    str_.append(file_contects[i])
-                    i += 1
-                other.append(''.join(str_))
-            else:
-                i += 1
-        if other and num_list:
-            print("("+ ''.join(other) + ' ' + ' '.join(num_list) + ")")
-        elif other:
-            print("("+ ''.join(other) + ")")
-        elif num_list:
-            print(' '.join(num_list))
+                return token.rstrip('0').rstrip('.') if '.' in token else token
+            except ValueError:
+                pass
+
+        i += 1
+        return token
+
+    while i < len(tokens):
+        expr = parse_expression()
+        if expr:
+            print(expr)

@@ -1,3 +1,10 @@
+def is_number(token):
+    try:
+        float(token)
+        return True
+    except ValueError:
+        return False
+
 def parse(file_contects):
     digit = []
     other = []
@@ -17,7 +24,7 @@ def parse(file_contects):
                 for i in token[2:-2]:
                     string.append(i)
                 s_ = "".join(string)
-            elif isinstance(float(token), float):
+            elif is_number(token):
                 digit.append(str(float(token)))
             else:
                 other.append(token)

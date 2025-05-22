@@ -1,57 +1,31 @@
-import re
-
-def parse(file_contents):
-    if not file_contents:
-        return
-
-    # Regex: match strings in quotes, or parentheses, or other non-space sequences
-    token_pattern = r'"[^"\n]*"|[()]|\S+'
-    tokens = re.findall(token_pattern, file_contents)
-    i = 0
-
-    def is_boolean(token):
-        return token in ["true", "false", "nil"]
-
-    def is_number(token):
-        try:
-            float(token)
-            return True
-        except ValueError:
-            return False
-
-    def is_string(token):
-        return token.startswith('"') and token.endswith('"')
-
-    def parse_expression():
-        nonlocal i
-        if i >= len(tokens):
-            return None
-
-        token = tokens[i]
-
-        if token == "(":
-            i += 1
-            inner = parse_expression()
-            if i >= len(tokens) or tokens[i] != ")":
-                print("Error: unmatched '('")
+def parse(file_contects):
+    digit = []
+    other = []
+    string = []
+    s = ''
+    s_ = ""
+    if file_contects:
+        for token in file_contects.split():
+            if token in ['nil', 'false', 'true']:
+                print(token)
                 exit(0)
-            i += 1
-            return f"(group {inner})"
-        elif is_string(token):
-            i += 1
-            return token[1:-1]  # Strip surrounding quotes
-        elif is_boolean(token):
-            i += 1
-            return token
-        elif is_number(token):
-            i += 1
-            return str(float(token)).rstrip("0").rstrip(".") if "." in token else token
-        else:
-            i += 1
-            return token
-
-    while i < len(tokens):
-        expr = parse_expression()
-        if expr:
-            print(expr)
-
+            if token[0] == '"' and token[len(token) - 1] == '"':
+                for i in token[1:-1]:
+                    string.append(i)
+                s = "".join(string)
+            elif (token[0] == '(' and token[len(token) - 1] == ')') and (token[1] == '"' and token[len(token) - 2] == '"'):
+                for i in token[2:-2]:
+                    string.append(i)
+                s_ = "".join(string)
+            elif isinstance(float(token), float):
+                digit.append(str(float(token)))
+            else:
+                other.append(token)
+        if digit and other:
+            print("(" + " ".join(other + digit) + ")")
+        elif digit:
+            print(" ".join(digit))
+        elif s:
+            print(s)
+        elif s_:
+            print("(" + "group" + " " + s_ + ")")

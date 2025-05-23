@@ -40,7 +40,7 @@ def parse(file_contents):
             expr = parse_expression()
             if i >= len(tokens) or tokens[i] != ")":
                 print("Error: unmatched '('")
-                exit(1)
+                exit(0)
             i += 1
             return f"(group {expr})"
 

@@ -1,16 +1,31 @@
-import re
-
 def parse(file_contents):
     if not file_contents:
         return
 
-    tokens = re.findall(r'"[^"]*"|\(|\)|[^\s()]+', file_contents)
+    tokens = list(file_contents.replace("(", " ( ").replace(")", " ) ").split())
     i = 0
 
     def parse_expression():
+        return parse_term()
+
+    def parse_term():
         nonlocal i
+        expr = parse_factor()
+
+        while i < len(tokens) and tokens[i] in ['+', '-']:
+            op = tokens[i]
+            i += 1
+            right = parse_factor()
+            expr = f"({op} {expr} {right})"
+
+        return expr
+
+    def parse_factor():
+        nonlocal i
+
         if i >= len(tokens):
-            return None
+            print("Error: Unexpected end of input")
+            exit(1)
 
         token = tokens[i]
 
@@ -23,28 +38,33 @@ def parse(file_contents):
             i += 1
             return f"(group {expr})"
 
-        elif token.startswith('"') and token.endswith('"'):
+        elif token in ("-", "!"):
+            op = token
             i += 1
-            return token[1:-1]
+            right = parse_factor()
+            if op == "-":
+                return f"(negate {right})"
+            else:
+                return f"(! {right})"
 
         elif token in ["true", "false", "nil"]:
             i += 1
             return token
 
+        elif token.startswith('"') and token.endswith('"'):
+            i += 1
+            return token[1:-1]
+
         else:
             try:
                 num = float(token)
                 i += 1
-                if num.is_integer():
-                    return f"{int(num)}.0"
-                else:
-                    return str(num).rstrip('0').rstrip('.') if '.' in str(num) else str(num)
+                return f"{num:.1f}"
             except ValueError:
                 i += 1
                 return token
 
     while i < len(tokens):
-        expr = parse_expression()
-        if expr:
-            print(expr)
+        print(parse_expression())
+
 

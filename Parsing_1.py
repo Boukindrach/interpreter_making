@@ -43,7 +43,9 @@ def parse(file_contents):
 
     while i < len(tokens):
         expr = parse_expression()
-        if expr:
+        if expr and ' ' in expr:
+            print(expr, end=" ")
+        elif expr and not ' ' in expr:
             print(expr, end=" ")
     print()
 

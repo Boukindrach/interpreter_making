@@ -35,7 +35,10 @@ def parse(file_contents):
             try:
                 num = float(token)
                 i += 1
-                return str(num).rstrip('0').rstrip('.') if '.' in str(num) else str(num)
+                if num.is_integer():
+                    return f"{int(num)}.0"
+                else:
+                    return str(num).rstrip('0').rstrip('.') if '.' in str(num) else str(num)
             except ValueError:
                 i += 1
                 return token

@@ -1,13 +1,14 @@
+import re
+
 def parse(file_contents):
     if not file_contents:
         return
 
-    tokens = list(file_contents.replace("(", " ( ").replace(")", " ) ").split())
+    tokens = re.findall(r'"[^"]*"|\(|\)|[^\s()]+', file_contents)
     i = 0
 
     def parse_expression():
         nonlocal i
-
         if i >= len(tokens):
             return None
 
@@ -32,20 +33,15 @@ def parse(file_contents):
 
         else:
             try:
-                float(token)
+                num = float(token)
                 i += 1
-                return token.rstrip('0').rstrip('.') if '.' in token else token
+                return str(num).rstrip('0').rstrip('.') if '.' in str(num) else str(num)
             except ValueError:
-                pass
-
-        i += 1
-        return token
+                i += 1
+                return token
 
     while i < len(tokens):
         expr = parse_expression()
-        if expr and ' ' in expr:
-            print(expr, end=" ")
-        elif expr and not ' ' in expr:
-            print(expr, end=" ")
-    print()
+        if expr:
+            print(expr)
 

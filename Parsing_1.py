@@ -45,5 +45,5 @@ def parse(file_contents):
         expr = parse_expression()
         if expr:
             print(expr, end=" ")
-    print("")
+    print()
 

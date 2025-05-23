@@ -1,8 +1,14 @@
+import re
+
 def parse(file_contents):
     if not file_contents:
         return
 
-    tokens = list(file_contents.replace("(", " ( ").replace(")", " ) ").split())
+    # Tokenizer: Add spacing around parens and operators
+    file_contents = re.sub(r'([()])', r' \1 ', file_contents)
+    file_contents = re.sub(r'([!+-])(?=\w|\()', r' \1 ', file_contents)  # handles !true, -5, !(true)
+
+    tokens = file_contents.split()
     i = 0
 
     def parse_expression():
@@ -42,10 +48,7 @@ def parse(file_contents):
             op = token
             i += 1
             right = parse_factor()
-            if op == "-":
-                return f"(negate {right})"
-            else:
-                return f"(! {right})"
+            return f"({ 'negate' if op == '-' else '!' } {right})"
 
         elif token in ["true", "false", "nil"]:
             i += 1
@@ -66,5 +69,3 @@ def parse(file_contents):
 
     while i < len(tokens):
         print(parse_expression())
-
-

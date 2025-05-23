@@ -1,38 +1,48 @@
-def is_number(token):
-    try:
-        float(token)
-        return True
-    except ValueError:
-        return False
+def parse(file_contents):
+    if not file_contents:
+        return
 
-def parse(file_contects):
-    digit = []
-    other = []
-    string = []
-    s = ''
-    s_ = ""
-    if file_contects:
-        for token in file_contects.split():
-            if token in ['nil', 'false', 'true']:
-                print(token)
-                exit(0)
-            if token[0] == '"' and token[len(token) - 1] == '"':
-                for i in token[1:-1]:
-                    string.append(i)
-                s = "".join(string)
-            elif (token[0] == '(' and token[len(token) - 1] == ')') and (token[1] == '"' and token[len(token) - 2] == '"'):
-                for i in token[2:-2]:
-                    string.append(i)
-                s_ = "".join(string)
-            elif is_number(token):
-                digit.append(str(float(token)))
-            else:
-                other.append(token)
-        if digit and other:
-            print("(" + " ".join(other + digit) + ")")
-        elif digit:
-            print(" ".join(digit))
-        elif s:
-            print(s)
-        elif s_:
-            print("(" + "group" + " " + s_ + ")")
+    tokens = list(file_contents.replace("(", " ( ").replace(")", " ) ").split())
+    i = 0
+
+    def parse_expression():
+        nonlocal i
+
+        if i >= len(tokens):
+            return None
+
+        token = tokens[i]
+
+        if token == "(":
+            i += 1
+            expr = parse_expression()
+            if i >= len(tokens) or tokens[i] != ")":
+                print("Error: unmatched '('")
+                exit(1)
+            i += 1
+            return f"(group {expr})"
+
+        elif token.startswith('"') and token.endswith('"'):
+            i += 1
+            return token[1:-1]
+
+        elif token in ["true", "false", "nil"]:
+            i += 1
+            return token
+
+        else:
+            try:
+                float(token)
+                i += 1
+                return token.rstrip('0').rstrip('.') if '.' in token else token
+            except ValueError:
+                pass
+
+        i += 1
+        return token
+
+    while i < len(tokens):
+        expr = parse_expression()
+        if expr:
+            print(expr)
+

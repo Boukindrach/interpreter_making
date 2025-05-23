@@ -48,7 +48,7 @@ def parse(file_contents):
             op = token
             i += 1
             right = parse_factor()
-            return f"({ 'negate' if op == '-' else '!' } {right})"
+            return f"({ '-' if op == '-' else '!' } {right})"
 
         elif token in ["true", "false", "nil"]:
             i += 1

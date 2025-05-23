@@ -44,5 +44,6 @@ def parse(file_contents):
     while i < len(tokens):
         expr = parse_expression()
         if expr:
-            print(expr)
+            print(expr, end=" ")
+    print("")
 

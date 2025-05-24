@@ -4,19 +4,15 @@ def evaluate(file_contents):
     str = ''
     long_string = file_contents
     for token in file_contents.split():
+        if '(' in token or ')' in token:
+            token = token.replace('(', "").replace(')', "")
         if token[0] >= '0' and token[0] <= '9':
             if '.' in token:
                 print(float(token))
             else:
                 print(token)
-        else:
-            if token[0] == '"':
-                q = 1
-                for i in long_string[1:]:
+        elif token[0] == '"':
+            for i in long_string:
+                if i != '(' and i != ')' and i != '"':
                     str += i
-                    if i == '"':
-                        print(str[:-1])
-                        return
-
-            else:
-                print(token)
+            print(str)

@@ -6,6 +6,9 @@ def evaluate(file_contents):
     for token in file_contents.split():
         if '(' in token or ')' in token:
             token = token.replace('(', "").replace(')', "")
+        if token in t:
+            print(token)
+            return
         if token[0] >= '0' and token[0] <= '9':
             if '.' in token:
                 print(float(token))

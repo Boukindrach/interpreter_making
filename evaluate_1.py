@@ -5,8 +5,65 @@ def evaluate(file_contents):
     s_ = []
     number = []
     long_string = file_contents
-
+    
+    # Check if we have parentheses - if so, use eval for proper precedence
     has_parentheses = '(' in file_contents or ')' in file_contents
+    
+    # If we have parentheses, handle the expression differently
+    if has_parentheses:
+        # Check for non-arithmetic tokens first
+        temp_tokens = file_contents.replace('(', ' ').replace(')', ' ').split()
+        for token in temp_tokens:
+            if token in t:
+                print(token)
+                return
+            elif token and token[0] == '"':
+                for i in long_string:
+                    if i != '(' and i != ')' and i != '"':
+                        str_content += i
+                print(str_content.strip())
+                return
+            elif token and token[0] == '!':
+                j = 0
+                for i in range(0, len(token)):
+                    if token[i] == '!':
+                        j += 1
+                    else:
+                        break
+                if j % 2 != 0:
+                    remaining = token[j:]
+                    if remaining == "true":
+                        print('false')
+                        return
+                    elif remaining == "false" or remaining == "nil":
+                        print('true')
+                        return
+                    else:
+                        print('false')
+                        return
+                else:
+                    remaining = token[j:]
+                    if remaining in t:
+                        print(remaining)
+                        return
+                    else:
+                        print('true')
+                        return
+            elif token and token not in s and not (token and token[0] >= '0' and token[0] <= '9') and token != '-':
+                print(token)
+                return
+        
+        # Use eval for arithmetic expressions with parentheses
+        try:
+            result = eval(file_contents.strip())
+            if isinstance(result, float) and result.is_integer():
+                print(int(result))
+            else:
+                print(result)
+            return
+        except:
+            print("Error: Invalid expression")
+            return
     
     for token in file_contents.split():
         original_token = token
@@ -65,20 +122,6 @@ def evaluate(file_contents):
         return
 
     elif number and s_:
-        if has_parentheses:
-            try:
-                clean_expr = file_contents.replace('(', ' ( ').replace(')', ' ) ')
-                tokens = clean_expr.split()
-                eval_expr = ' '.join(tokens)
-                result = eval(eval_expr)
-                if isinstance(result, float) and result.is_integer():
-                    print(int(result))
-                else:
-                    print(result)
-                return
-            except:
-                print("Error: Invalid expression")
-                return
         
         expression = []
         
@@ -124,4 +167,3 @@ def evaluate(file_contents):
                 print(result)
         else:
             print("Error: Invalid expression")
-

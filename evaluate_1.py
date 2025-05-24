@@ -36,6 +36,11 @@ def evaluate(file_contents):
                 else:
                     print('false')
             else:
-                print(token[j:])
+                if token[1:] in t:
+                    print(token[1:])
+                    return
+                else:
+                    print('true')
+                    return
         else:
             print(token)

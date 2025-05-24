@@ -11,19 +11,21 @@ def evaluate(file_contents):
     
     # If we have parentheses, handle the expression differently
     if has_parentheses:
-        # Check for non-arithmetic tokens first
+        # First check if it's a string
+        if '"' in file_contents:
+            for i in long_string:
+                if i != '(' and i != ')' and i != '"':
+                    str_content += i
+            print(str_content.strip())
+            return
+        
+        # Check for boolean or negation tokens (but be careful with negative numbers)
         temp_tokens = file_contents.replace('(', ' ').replace(')', ' ').split()
         for token in temp_tokens:
             if token in t:
                 print(token)
                 return
-            elif token and token[0] == '"':
-                for i in long_string:
-                    if i != '(' and i != ')' and i != '"':
-                        str_content += i
-                print(str_content.strip())
-                return
-            elif token and token[0] == '!':
+            elif token and token[0] == '!' and len(token) > 1:  # Make sure it's not just a minus sign
                 j = 0
                 for i in range(0, len(token)):
                     if token[i] == '!':
@@ -49,7 +51,15 @@ def evaluate(file_contents):
                     else:
                         print('true')
                         return
-            elif token and token not in s and not (token and token[0] >= '0' and token[0] <= '9') and token != '-':
+        
+        # Check for non-arithmetic identifiers (but exclude numbers and operators)
+        for token in temp_tokens:
+            if (token and 
+                token not in s and 
+                token not in t and
+                not (token and token[0] >= '0' and token[0] <= '9') and
+                not (token and token[0] == '-' and len(token) > 1 and token[1] >= '0' and token[1] <= '9') and
+                token[0] != '!'):
                 print(token)
                 return
         

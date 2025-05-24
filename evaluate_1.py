@@ -4,4 +4,13 @@ def evaluate(file_contents):
     str = ''
     i = 0
     for token in file_contents.split():
-        print(token)
+        if token[0] >= '0' and token[0] <= '9':
+            if '.' in token:
+                print(float(token))
+            else:
+                print(token)
+        else:
+            if token[0] == '"' and token[-1] == '"':
+                print(token[1: -1])
+            else:
+                print(token)

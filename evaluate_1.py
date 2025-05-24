@@ -20,13 +20,22 @@ def evaluate(file_contents):
                     str += i
             print(str)
         elif token[0] == '!':
-            if token[1:] == "true":
-                print('false')
-                return
-            elif token[1:] == "false" or token[1:] == "nil":
-                print('true')
-                return
+            j = 0
+            for i in range(0, len(token)):
+                if token[i] == '!':
+                    j += 1
+                else:
+                    break
+            if j % 2 != 0:
+                if token[1:] == "true":
+                    print('false')
+                    return
+                elif token[1:] == "false" or token[1:] == "nil":
+                    print('true')
+                    return
+                else:
+                    print('false')
             else:
-                print('false')
+                print(token[j:])
         else:
             print(token)

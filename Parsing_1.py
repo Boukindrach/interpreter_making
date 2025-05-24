@@ -4,9 +4,8 @@ def parse(file_contents):
     if not file_contents:
         return
 
-    # Tokenizer: Add spacing around parens and operators
     file_contents = re.sub(r'([()])', r' \1 ', file_contents)
-    file_contents = re.sub(r'([!+-])(?=\w|\()', r' \1 ', file_contents)  # handles !true, -5, !(true)
+    file_contents = re.sub(r'([!+-])(?=\w|\()', r' \1 ', file_contents)
 
     tokens = file_contents.split()
     i = 0

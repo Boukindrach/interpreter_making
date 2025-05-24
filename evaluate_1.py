@@ -5,8 +5,11 @@ def evaluate(file_contents):
     s_ = []
     number = []
     long_string = file_contents
+
+    has_parentheses = '(' in file_contents or ')' in file_contents
     
     for token in file_contents.split():
+        original_token = token
         if '(' in token or ')' in token:
             token = token.replace('(', "").replace(')', "")
         
@@ -62,6 +65,21 @@ def evaluate(file_contents):
         return
 
     elif number and s_:
+        if has_parentheses:
+            try:
+                clean_expr = file_contents.replace('(', ' ( ').replace(')', ' ) ')
+                tokens = clean_expr.split()
+                eval_expr = ' '.join(tokens)
+                result = eval(eval_expr)
+                if isinstance(result, float) and result.is_integer():
+                    print(int(result))
+                else:
+                    print(result)
+                return
+            except:
+                print("Error: Invalid expression")
+                return
+        
         expression = []
         
         for i in range(len(number)):

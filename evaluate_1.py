@@ -19,3 +19,14 @@ def evaluate(file_contents):
                 if i != '(' and i != ')' and i != '"':
                     str += i
             print(str)
+        elif token[0] == '!':
+            if token[1:] == "true":
+                print('false')
+                return
+            elif token[1:] == "false":
+                print('true')
+                return
+            else:
+                print('false')
+        else:
+            print(token)

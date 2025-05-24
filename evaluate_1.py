@@ -19,6 +19,7 @@ def evaluate(file_contents):
                 if i != '(' and i != ')' and i != '"':
                     str += i
             print(str)
+            return
         elif token[0] == '!':
             j = 0
             for i in range(0, len(token)):
